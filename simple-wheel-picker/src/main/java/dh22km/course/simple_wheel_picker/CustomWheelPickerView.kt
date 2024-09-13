@@ -1,32 +1,38 @@
-package dh22km.course.recycleviewsnap
+package dh22km.course.simple_wheel_picker
 
 import android.content.Context
-import android.graphics.drawable.Drawable
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import dh22km.course.recycleviewsnap.databinding.InfoTextBinding
 
-class CustomWheelViewHolder(itemView: View) :
+class CustomWheelViewHolder(itemView: TextView) :
     BaseWheelPickerView.ViewHolder<CustomWheelPickerView.Item>(itemView) {
-    val binding = InfoTextBinding.bind(itemView)
-    override fun onBindData(data: CustomWheelPickerView.Item) = with(binding) {
-        tvInfo.text = data.text
+    override fun onBindData(data: CustomWheelPickerView.Item) {
+        (itemView as TextView).text = data.text
     }
 }
 
 class CustomWheelAdapter :
     BaseWheelPickerView.Adapter<CustomWheelPickerView.Item, CustomWheelViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomWheelViewHolder {
-        val view =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.info_text, parent, false)
-        return CustomWheelViewHolder(view)
+        val textView = TextView(parent.context).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, // width
+                150 // height, you can adjust it accordingly or use WRAP_CONTENT
+            )
+            // Set other properties like text alignment, padding, etc.
+            gravity = Gravity.CENTER
+            textSize = 18f
+            setPadding(16, 16, 16, 16)
+            setTextColor(Color.BLACK)
+        }
+
+        // Return a ViewHolder with the programmatically created TextView
+        return CustomWheelViewHolder(textView)
     }
 }
 
@@ -36,7 +42,7 @@ class CustomWheelPickerView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : BaseWheelPickerView(context, attrs, defStyleAttr) {
     data class Item(val text: String)
-    private val values: ArrayList<CustomWheelPickerView.Item> = arrayListOf(
+    private val values: ArrayList<Item> = arrayListOf(
         Item("Hook"),
         Item("Hulk"),
         Item("Sentry"),
@@ -49,7 +55,6 @@ class CustomWheelPickerView @JvmOverloads constructor(
 
     private val highlightView: View = run {
         val view = View(context)
-        view.background = ContextCompat.getDrawable(context, R.drawable.custom_wheel_highlight_bg)
         view
     }
 
@@ -60,8 +65,7 @@ class CustomWheelPickerView @JvmOverloads constructor(
         addView(highlightView)
         (highlightView.layoutParams as? LayoutParams)?.apply {
             width = ViewGroup.LayoutParams.MATCH_PARENT
-            height =
-                context.resources.getDimensionPixelSize(R.dimen.custom_wheel_picker_item_height)
+            height = Color.BLACK
             gravity = Gravity.CENTER_VERTICAL
         }
         adapter.values = values

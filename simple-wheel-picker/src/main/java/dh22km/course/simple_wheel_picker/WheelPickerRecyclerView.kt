@@ -1,4 +1,4 @@
-package dh22km.course.recycleviewsnap
+package dh22km.course.simple_wheel_picker
 
 import android.content.Context
 import android.graphics.Camera
@@ -66,8 +66,8 @@ class WheelPickerRecyclerView @JvmOverloads constructor(
     }
 
     init {
-        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        linearLayoutManager.stackFromEnd = true
+        // val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        // linearLayoutManager.stackFromEnd = true
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         snapHelper.attachToRecyclerView(this)
         overScrollMode = OVER_SCROLL_NEVER

@@ -1,0 +1,13 @@
+jdk:
+  - adoptopenjdk17  # JitPack uses AdoptOpenJDK for JDK 17
+
+build:
+  install:
+    - ./gradlew clean build  # Customize this if you need specific Gradle tasks
+  after_success:
+    - echo "Build successful!"
+    - ./gradlew publishToMavenLocal  # Customize if you want to publish artifacts
+
+cache:
+  paths:
+    - ~/.gradle/caches/  # Cache Gradle to speed up future builds

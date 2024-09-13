@@ -1,4 +1,4 @@
-package dh22km.course.recycleviewsnap
+package dh22km.course.simple_wheel_picker
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
