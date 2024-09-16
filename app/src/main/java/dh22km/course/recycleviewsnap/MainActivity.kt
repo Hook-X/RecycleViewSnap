@@ -11,6 +11,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val values: ArrayList<String> = arrayListOf(
+            "Hook",
+            "Hulk",
+            "Sentry",
+            "Constantine",
+            "Superman",
+            "Spiderman",
+        )
+
 //        val layout = LinearLayout(this)
 //        layout.layoutParams = LinearLayout.LayoutParams(
 //            LinearLayout.LayoutParams.MATCH_PARENT,
@@ -21,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         customWheelPicker.layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
-            600
+            FrameLayout.LayoutParams.MATCH_PARENT
         )
 
         customWheelPicker.setWheelListener(object : BaseWheelPickerView.WheelPickerViewListener {
@@ -31,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         customWheelPicker.selectedIndex = 1
+        customWheelPicker.setData(values)
 
         //layout.addView(customWheelPicker)
 

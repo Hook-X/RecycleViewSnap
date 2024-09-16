@@ -7,17 +7,16 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 
 class CustomWheelViewHolder(itemView: TextView) :
-    BaseWheelPickerView.ViewHolder<CustomWheelPickerView.Item>(itemView) {
-    override fun onBindData(data: CustomWheelPickerView.Item) {
-        (itemView as TextView).text = data.text
+    BaseWheelPickerView.ViewHolder<String>(itemView) {
+    override fun onBindData(data: String) {
+        (itemView as TextView).text = data
     }
 }
 
 class CustomWheelAdapter :
-    BaseWheelPickerView.Adapter<CustomWheelPickerView.Item, CustomWheelViewHolder>() {
+    BaseWheelPickerView.Adapter<String, CustomWheelViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomWheelViewHolder {
         val textView = TextView(parent.context).apply {
             layoutParams = ViewGroup.LayoutParams(
@@ -41,16 +40,7 @@ class CustomWheelPickerView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : BaseWheelPickerView(context, attrs, defStyleAttr) {
-    data class Item(val text: String)
-    private val values: ArrayList<Item> = arrayListOf(
-        Item("Hook"),
-        Item("Hulk"),
-        Item("Sentry"),
-        Item("Constantine"),
-        Item("Superman"),
-        Item("Spiderman"),
-        Item("Xenos"),
-        Item("Narin"),
+    private var values: ArrayList<String> = arrayListOf(
     )
 
     private val highlightView: View = run {
@@ -68,6 +58,11 @@ class CustomWheelPickerView @JvmOverloads constructor(
             height = Color.BLACK
             gravity = Gravity.CENTER_VERTICAL
         }
+        adapter.values = values
+    }
+
+    fun setData(data: ArrayList<String>) {
+        this.values = data;
         adapter.values = values
     }
 }

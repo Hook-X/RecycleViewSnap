@@ -46,4 +46,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation project(':simple-wheel-picker')
+    //implementation 'com.github.Hook-X:RecycleViewSnap:1.0.1'
 }
